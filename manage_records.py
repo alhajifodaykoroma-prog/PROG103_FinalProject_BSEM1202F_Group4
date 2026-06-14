@@ -2,6 +2,20 @@ import sqlite3
 from tkinter import *
 from tkinter import ttk, messagebox
 
+# ===================== CLINICAL THEME =====================
+NAVY      = "#0B1F3A"
+TEAL      = "#0E7C7B"
+TEAL_DK   = "#0A5C5B"
+APP_BG    = "#EEF3F8"
+CARD_BG   = "#FFFFFF"
+BORDER    = "#D7E0EC"
+FONT      = "Lato"
+
+
+def _hover(btn, normal, hover):
+    btn.bind("<Enter>", lambda e: btn.config(bg=hover))
+    btn.bind("<Leave>", lambda e: btn.config(bg=normal))
+
 
 # ---------------- DATABASE CONNECTION ----------------
 def get_db_connection():
@@ -15,7 +29,11 @@ def open_record_management_window():
     manage_win = Toplevel()
     manage_win.title("Professional Record Management")
     manage_win.geometry("1250x750")
-    manage_win.config(bg="#ECF0F1")
+    manage_win.config(bg=APP_BG)
+    manage_win.option_add("*Font", (FONT, 10))
+    manage_win.option_add("*Entry.relief", "solid")
+    manage_win.option_add("*Entry.borderWidth", "1")
+    manage_win.option_add("*Entry.highlightThickness", "0")
 
     # =====================================================
     # PATIENT SECTION
@@ -26,8 +44,8 @@ def open_record_management_window():
         padx=10,
         pady=10,
         bg="white",
-        font=("Arial", 11, "bold"),
-        fg="#0B1F3A"
+        font=(FONT, 11, "bold"),
+        fg=NAVY
     )
     patient_frame.pack(fill=X, padx=10, pady=5)
 
@@ -168,7 +186,8 @@ def open_record_management_window():
     patient_button_frame = Frame(patient_frame, bg="white")
     patient_button_frame.pack(pady=5)
 
-    Button(patient_button_frame, text="📝 Save Field Changes (Edit)", bg="#2C3E50", fg="white",
+    Button(patient_button_frame, text="📝 Save Field Changes (Edit)", bg=TEAL, fg="white",
+           font=(FONT, 10, "bold"), bd=0, cursor="hand2", activebackground=TEAL_DK, activeforeground="white",
            command=update_patient_details).grid(row=0, column=0, padx=15)
     Button(patient_button_frame, text="Set Active", bg="green", fg="white",
            command=lambda: change_patient_status("Active")).grid(row=0, column=1, padx=5)
@@ -186,8 +205,8 @@ def open_record_management_window():
         padx=10,
         pady=10,
         bg="white",
-        font=("Arial", 11, "bold"),
-        fg="#0B1F3A"
+        font=(FONT, 11, "bold"),
+        fg=NAVY
     )
     doctor_frame.pack(fill=X, padx=10, pady=5)
 
@@ -328,7 +347,8 @@ def open_record_management_window():
     doctor_button_frame = Frame(doctor_frame, bg="white")
     doctor_button_frame.pack(pady=5)
 
-    Button(doctor_button_frame, text="📝 Save Field Changes (Edit)", bg="#2C3E50", fg="white",
+    Button(doctor_button_frame, text="📝 Save Field Changes (Edit)", bg=TEAL, fg="white",
+           font=(FONT, 10, "bold"), bd=0, cursor="hand2", activebackground=TEAL_DK, activeforeground="white",
            command=update_doctor_details).grid(row=0, column=0, padx=15)
     Button(doctor_button_frame, text="Set Active", bg="green", fg="white",
            command=lambda: change_doctor_status("Active")).grid(row=0, column=1, padx=5)

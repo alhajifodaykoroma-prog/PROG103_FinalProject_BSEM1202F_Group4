@@ -3,6 +3,21 @@ from tkinter import *
 from tkinter import messagebox, ttk
 from utils import generate_doctor_code
 
+# ===================== CLINICAL THEME =====================
+NAVY      = "#0B1F3A"
+TEAL      = "#0E7C7B"
+TEAL_DK   = "#0A5C5B"
+APP_BG    = "#EEF3F8"
+CARD_BG   = "#FFFFFF"
+BORDER    = "#D7E0EC"
+TEXT_MUTE = "#64748B"
+FONT      = "Lato"
+
+
+def _hover(btn, normal, hover):
+    btn.bind("<Enter>", lambda e: btn.config(bg=hover))
+    btn.bind("<Leave>", lambda e: btn.config(bg=normal))
+
 
 # ---------------- Database Engine Reader ----------------
 def get_db_connection():
@@ -17,7 +32,11 @@ def open_doctor_window():
     root = Toplevel()
     root.title("Doctor Management Registry")
     root.geometry("600x480")
-    root.config(bg="#F2F4F4")
+    root.config(bg=APP_BG)
+    root.option_add("*Font", (FONT, 10))
+    root.option_add("*Entry.relief", "solid")
+    root.option_add("*Entry.borderWidth", "1")
+    root.option_add("*Entry.highlightThickness", "0")
 
     # Variables
     name_var = StringVar()
@@ -110,19 +129,19 @@ def open_doctor_window():
     Label(
         root,
         text="DOCTOR MANAGEMENT REGISTRY",
-        font=("Arial",14,"bold"),
-        bg="#2C3E50",
+        font=(FONT,14,"bold"),
+        bg=NAVY,
         fg="white",
-        pady=10
+        pady=14
     ).pack(fill=X)
 
 
     frame = Frame(
         root,
-        bg="white",
+        bg=CARD_BG,
         padx=20,
         pady=20,
-        highlightbackground="#BDC3C7",
+        highlightbackground=BORDER,
         highlightthickness=1
     )
 
@@ -191,16 +210,22 @@ def open_doctor_window():
     ).grid(row=3,column=1,pady=15)
 
 
-    Button(
+    register_doctor_btn = Button(
         root,
         text="Register Doctor Details",
-        bg="#2C3E50",
+        bg=TEAL,
         fg="white",
-        font=("Arial",11,"bold"),
+        bd=0,
+        cursor="hand2",
+        activebackground=TEAL_DK,
+        activeforeground="white",
+        font=(FONT,11,"bold"),
         padx=15,
         pady=8,
         command=save_doctor
-    ).pack(pady=10)
+    )
+    register_doctor_btn.pack(pady=10)
+    _hover(register_doctor_btn, TEAL, TEAL_DK)
 
 
 

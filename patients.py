@@ -3,6 +3,21 @@ from tkinter import *
 from tkinter import ttk, messagebox
 from utils import generate_patient_code
 
+# ===================== CLINICAL THEME =====================
+NAVY      = "#0B1F3A"
+TEAL      = "#0E7C7B"
+TEAL_DK   = "#0A5C5B"
+APP_BG    = "#EEF3F8"
+CARD_BG   = "#FFFFFF"
+BORDER    = "#D7E0EC"
+TEXT_MUTE = "#64748B"
+FONT      = "Lato"
+
+
+def _hover(btn, normal, hover):
+    btn.bind("<Enter>", lambda e: btn.config(bg=hover))
+    btn.bind("<Leave>", lambda e: btn.config(bg=normal))
+
 
 # ---------------- Database Engine Reader ----------------
 def get_db_connection():
@@ -16,8 +31,12 @@ def open_patient_window():
 
     root = Toplevel()
     root.title("Patient Registration Desk")
-    root.geometry("600x550")
-    root.config(bg="#F2F4F4")
+    root.geometry("600x560")
+    root.config(bg=APP_BG)
+    root.option_add("*Font", (FONT, 10))
+    root.option_add("*Entry.relief", "solid")
+    root.option_add("*Entry.borderWidth", "1")
+    root.option_add("*Entry.highlightThickness", "0")
 
     # Variables
     name_var = StringVar()
@@ -116,17 +135,19 @@ def open_patient_window():
     Label(
         root,
         text="PATIENT REGISTRATION FORM",
-        font=("Arial",14,"bold"),
-        bg="#0B1F3A",
+        font=(FONT,14,"bold"),
+        bg=NAVY,
         fg="white",
-        pady=10
+        pady=14
     ).pack(fill=X)
 
     frame = Frame(
         root,
-        bg="white",
+        bg=CARD_BG,
         padx=20,
-        pady=20
+        pady=20,
+        highlightbackground=BORDER,
+        highlightthickness=1
     )
 
     frame.pack(pady=20)
@@ -159,14 +180,22 @@ def open_patient_window():
     Label(frame,text="Symptoms",bg="white").grid(row=5,column=0,pady=10,sticky=W)
     Entry(frame,textvariable=symptoms_var,width=30).grid(row=5,column=1)
 
-    Button(
+    save_patient_btn = Button(
         root,
         text="Save Patient Record",
         command=save_patient,
-        bg="#0B1F3A",
+        bg=TEAL,
         fg="white",
-        font=("Arial",11,"bold")
-    ).pack(pady=15)
+        bd=0,
+        cursor="hand2",
+        activebackground=TEAL_DK,
+        activeforeground="white",
+        padx=15,
+        pady=8,
+        font=(FONT,11,"bold")
+    )
+    save_patient_btn.pack(pady=15)
+    _hover(save_patient_btn, TEAL, TEAL_DK)
 
 
 
