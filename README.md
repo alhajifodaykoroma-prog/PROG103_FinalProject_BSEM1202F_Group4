@@ -1,181 +1,204 @@
-# 🏥 Sierra Leone Community Health Management System
+<h1 align="center">🏥 Sierra Leone Community Health Management System</h1>
 
-![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python) ![SQLite](https://img.shields.io/badge/Database-SQLite3-lightgrey?logo=sqlite) ![Tkinter](https://img.shields.io/badge/GUI-Tkinter-green) ![License](https://img.shields.io/badge/License-MIT-yellow)
+<p align="center">
+  <em>A desktop clinic management system for community health facilities — built to bring fast, reliable patient, consultation, and billing record-keeping to clinics in Sierra Leone.</em>
+</p>
 
-> **PROG103 Final Project — BSEM1202F Group 8**
-> A desktop clinic management application built to modernize healthcare record-keeping in Sierra Leone.
-
----
-
-## 📋 Table of Contents
-
-- [Project Overview](#project-overview)
-- [Project Objectives](#project-objectives)
-- [Technologies Used](#technologies-used)
-- [System Architecture & Features](#-system-architecture--features)
-- [Database Tables](#database-tables)
-- [Key Features](#key-features)
-- [Installation & Execution](#️-installation--execution)
-- [Future Improvements](#future-improvements)
-- [Community Impact](#community-impact)
-- [SDG 3 Alignment](#-sustainable-development-goal-sdg-3-alignment)
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/GUI-Tkinter-0E7C7B" alt="Tkinter">
+  <img src="https://img.shields.io/badge/Database-SQLite-003B57?logo=sqlite&logoColor=white" alt="SQLite">
+  <img src="https://img.shields.io/badge/Dependencies-Zero%20(stdlib)-1E9E62" alt="No dependencies">
+  <img src="https://img.shields.io/badge/SDG-3%20Good%20Health-DC2626" alt="SDG 3">
+  <img src="https://img.shields.io/badge/License-MIT-blue" alt="License">
+</p>
 
 ---
 
-## 📌 Project Overview
+## 📖 Overview
 
-The **Sierra Leone Community Health Management System** is a desktop application developed using **Python**, **Tkinter**, and **SQLite3** to digitize patient record management in local clinics.
+The **Sierra Leone Community Health Management System** is an offline-first desktop
+application that digitises the day-to-day operations of a community clinic:
+registering patients, managing doctors, logging consultations, generating bills, and
+producing live analytical reports.
 
-The system replaces paper-based record keeping with a secure electronic database that enables faster patient registration, retrieval, billing, and medical follow-up tracking — significantly improving healthcare delivery in rural and urban clinics across Sierra Leone.
-
----
-
-## 🎯 Project Objectives
-
-- ✔️ Improve patient record management
-- ✔️ Reduce loss of medical records
-- ✔️ Improve retrieval speed of patient information
-- ✔️ Automate follow-up scheduling
-- ✔️ Generate financial reports for clinic management
-- ✔️ Support healthcare delivery in rural and urban clinics
+It is aligned with **UN Sustainable Development Goal 3 — Good Health and Well-Being**,
+and is designed to run on modest hardware with **no internet connection and no external
+dependencies**, making it practical for low-resource clinical settings.
 
 ---
 
-## 🛠️ Technologies Used
+## 🖼️ Screenshots
 
-| Technology     | Purpose                    |
-|----------------|----------------------------|
-| Python         | Application Development    |
-| Tkinter        | Graphical User Interface   |
-| SQLite3        | Database Management        |
-| shutil         | Database Backup System     |
-| datetime       | Appointment Scheduling     |
-| ttk.Treeview   | Data Visualization         |
+### Secure Login
+![Login screen](screenshots/login.png)
 
----
+### Main Dashboard — Live Facility Analytics
+![Dashboard](screenshots/dashboard.png)
 
-## 🏗️ System Architecture & Features
+### Clinical Analytics & Reports
+![Reports](screenshots/reports.png)
 
-| Module                  | Description |
-|-------------------------|-------------|
-| `main.py`               | Master orchestrator — deploys a live, real-time administrative dashboard displaying total metric aggregates (`COUNT`, `SUM`) |
-| `manage_records.py`     | Advanced multi-record interface with text-matching queries (`LIKE %query%`) for responsive searches and interactive row hooks (`<<TreeviewSelect>>`) for inline record edits |
-| `upgrade_database.py`   | Schema updater with an automated data redundancy mechanism (`shutil`) that creates timestamped snapshots of `clinic.db` on startup |
 
 ---
 
-## 🗄️ Database Tables
+## ✨ Features
 
-### 👤 Patients
-| Field         | Description              |
-|---------------|--------------------------|
-| Patient ID    | Unique identifier        |
-| Full Name     | Patient's full name      |
-| Age           | Patient's age            |
-| Gender        | Patient's gender         |
-| Address       | Residential address      |
-| Phone Number  | Contact number           |
-
-### 🏨 Visits
-| Field        | Description                  |
-|--------------|------------------------------|
-| Visit ID     | Unique visit identifier      |
-| Patient ID   | Linked patient reference     |
-| Diagnosis    | Medical diagnosis            |
-| Treatment    | Treatment administered       |
-| Review Date  | Scheduled follow-up date     |
-
-### 💵 Billing
-| Field             | Description                 |
-|-------------------|-----------------------------|
-| Invoice Number    | Unique billing reference    |
-| Consultation Fee  | Fee for consultation        |
-| Medicine Cost     | Cost of prescribed medicine |
-| Total Cost        | Total amount charged        |
+- **🔐 Secure Login** — role-based access control with an administrator account.
+- **👤 Patient Registration** — capture demographics, contact details, symptoms, and an auto-generated patient code (`PAT001`, `PAT002`, …).
+- **🩺 Doctor Management** — register doctors with specialization, availability, and employment status; auto-generated doctor codes (`DOC001`, …).
+- **📝 Consultation Desk** — link a patient to a doctor, record diagnosis and prescription, and auto-calculate a recommended revisit date based on the condition.
+- **💳 Billing Operations** — itemised billing (consultation, medicine, treatment fees) with automatic total calculation, recorded in Sierra Leonean Leones (Le).
+- **📂 Record Management** — search, edit, and update patient and doctor records, including status changes (Active, Discharged, Retired, Suspended, etc.).
+- **📊 Reports & Analytics** — live facility metrics and a "Top Epidemiological Case Distributions" table that ranks the most frequent diagnoses.
+- **⚡ Live Dashboard** — key statistics (patients, doctors, consultations, revenue) refresh instantly as records are saved.
 
 ---
 
-## ✅ Key Features
+## 🛠️ Tech Stack
 
-| Feature                              | Status  |
-|--------------------------------------|---------|
-| Patient Registration                 | ✅ Done |
-| Patient Search and Retrieval         | ✅ Done |
-| Record Editing and Updating          | ✅ Done |
-| Automated Follow-Up Scheduling       | ✅ Done |
-| Billing and Invoice Generation       | ✅ Done |
-| Real-Time Dashboard Analytics        | ✅ Done |
-| Automatic Database Backup            | ✅ Done |
-| Disease Tracking (Malaria & Typhoid) | ✅ Done |
+| Layer        | Technology                                  |
+|--------------|---------------------------------------------|
+| Language     | Python 3.10+                                |
+| GUI          | Tkinter / ttk (Python standard library)     |
+| Database     | SQLite 3 (Python standard library)          |
+| Typography   | [Lato](https://fonts.google.com/specimen/Lato) (recommended) |
+| Dependencies | **None** — runs entirely on the standard library |
 
 ---
 
-## 🚀 Installation & Execution
+## 📁 Project Structure
+
+```
+ROBERTS/
+├── login.py              # Entry point — secure login screen
+├── main.py               # Main dashboard + consultation & billing desks
+├── patients.py           # Patient registration window
+├── doctors.py            # Doctor management window
+├── consultations.py      # Standalone consultation module
+├── billing.py            # Standalone billing module
+├── manage_records.py     # Search / edit / update patient & doctor records
+├── reports.py            # Analytics dashboard & epidemiology report
+├── database.py           # Creates the SQLite schema + admin user
+├── upgrade_database.py   # Legacy migration helper (status columns + backup)
+├── seed_mock_data.py     # Loads realistic demo data for testing/demos
+├── utils.py              # Patient/doctor code generators
+├── screenshots/          # README images
+├── README.md
+├── LICENSE
+└── .gitignore
+```
+
+
+---
+
+## 🗄️ Database Schema
+
+The application uses a single SQLite database file (`clinic.db`) with five tables:
+
+| Table           | Key Columns                                                                 |
+|-----------------|-----------------------------------------------------------------------------|
+| `patients`      | patient_id, patient_code, full_name, age, gender, address, symptoms, registration_date, status, phone |
+| `doctors`       | doctor_id, doctor_code, doctor_name, specialization, phone, availability, employment_status |
+| `consultations` | consultation_id, patient_id → patients, doctor_id → doctors, symptoms, diagnosis, prescription, revisit_date |
+| `billing`       | bill_id, patient_id → patients, consultation_fee, medicine_fee, treatment_fee, total_bill |
+| `users`         | user_id, username, password, role                                           |
+
+> Foreign keys link consultations and billing back to patients and doctors, keeping clinical records consistent.
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Python 3.x installed on your machine
-- No additional pip packages required (uses Python standard library only)
+- **Python 3.10 or newer**
+- **Tkinter** — bundled with Python on Windows and macOS. On Debian/Ubuntu/Kali, install it with:
+  ```bash
+  sudo apt install python3-tk
+  ```
+- *(Optional, for best appearance)* the **Lato** font:
+  ```bash
+  sudo apt install fonts-lato
+  ```
 
-### Steps
+No `pip install` is required — the project uses only the Python standard library.
 
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/alhajifodaykoroma-prog/PROG103_FinalProject_BSEM1202F_Group4.git
-   cd PROG103_FinalProject_BSEM1202F_Group4
-   ```
+### Installation
 
-2. **Run the Application:**
-   ```bash
-   python main.py
-   ```
+```bash
+# 1. Clone the repository
+git clone <your-repo-url>
+cd ROBERTS
 
-3. **On first run**, `upgrade_database.py` will automatically initialize and back up the database.
+# 2. Create the database, schema, and administrator account
+python3 database.py
 
----
+# 3. (Optional) Load realistic demo data for testing or demonstrations
+python3 seed_mock_data.py
 
-## 🔮 Future Improvements
+# 4. Launch the application
+python3 login.py
+```
 
-- [ ] Multi-user authentication system
-- [ ] Cloud database integration
-- [ ] SMS appointment reminders
-- [ ] PDF report generation
-- [ ] Mobile application support
-- [ ] Integration with national health records
+### Default Login
 
----
+| Username           | Password         | Role          |
+|--------------------|------------------|---------------|
+| `robertissackamara` | `Do3tors@veslives` | Administrator |
 
-## 🌍 Community Impact
+> ⚠️ **Security note:** credentials are stored for demonstration purposes. For any real deployment, change the default login and hash stored passwords.
 
-The system contributes to improved healthcare delivery by:
-
-- 🕐 Reducing patient waiting time
-- 📄 Improving medical record accuracy
-- 🦠 Supporting disease surveillance
-- 💰 Enhancing clinic revenue tracking
-- 🔄 Improving continuity of patient care
 
 ---
 
-## 🌐 Sustainable Development Goal (SDG) 3 Alignment
+## 📋 Usage Guide
 
-This digital solution natively addresses **UN Sustainable Development Goal 3: Good Health and Well-being**:
-
-- **Epidemiological Automation (Target 3.3):** Embeds tracking logic for endemic conditions (Malaria and Typhoid), dynamically computing strict 3-day and 7-day review intervals depending on diagnoses.
-- **Financial Sustainability (Target 3c):** Prevents healthcare revenue leaks via structured consultation, medicine, and treatment billing invoice configurations.
+1. **Log in** with the administrator account on the launch screen.
+2. From the **dashboard**, use the *System Operations Menu* to open any module:
+   - **Patient Registration** → add a new patient (name and phone are required).
+   - **Doctor Management** → register a doctor and their specialization.
+   - **Consultation Desk** → select a patient and doctor, record the diagnosis; a revisit date is suggested automatically.
+   - **Billing Operations** → select a patient and enter fees; the total is calculated and saved.
+   - **Record Management** → search and update existing patients or doctors, or change their status.
+   - **Reports & Analytics** → view live counts, total revenue, and the most common diagnoses.
+3. The **Live Facility Analytical Overview** cards refresh automatically whenever a record is saved, or on demand via **🔄 Recalculate Statistics**.
 
 ---
 
-## 👥 Group 8 — BSEM1202F
+## 🧪 Demo Data
 
-> PROG103 Final Project | Submitted in partial fulfillment of the course requirements.
+Running `python3 seed_mock_data.py` populates the system with a realistic sample
+clinic dataset (Freetown-based patients, doctors across multiple specializations,
+consultations, and bills) so every screen displays meaningful figures during a
+demonstration. The script is **idempotent** — it safely clears and re-seeds the demo
+tables on each run while preserving the login account.
 
 ---
 
-*Made with ❤️ for better healthcare in Sierra Leone*
-| Tkinter | Graphical User Interface |
-| SQLite3 | Database Management |
-| shutil | Database Backup System |
-| datetime | Appointment Scheduling |
-| ttk.Treeview | Data Visualization 
+## 🗺️ Roadmap
 
+- [ ] Hash stored passwords (e.g. `bcrypt`) instead of plain text
+- [ ] Multi-user roles (receptionist, nurse, doctor) with scoped permissions
+- [ ] Export reports to PDF / CSV
+- [ ] Appointment scheduling and revisit reminders
+- [ ] Automated database backups
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome. Feel free to fork the
+repository, create a feature branch, and open a pull request.
+
+---
+
+## 📄 License
+
+This project is licensed under the terms described in the [LICENSE](LICENSE) file.
+
+---
+
+<p align="center">
+  <sub>Built with ❤️ for community health in Sierra Leone · Aligned with SDG 3: Good Health & Well-Being</sub>
+</p>
