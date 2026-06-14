@@ -9,7 +9,6 @@ cursor = conn.cursor()
 # Enable Foreign Keys
 cursor.execute("PRAGMA foreign_keys=ON")
 
-
 # ------ PATIENT TABLE ------
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS patients(
@@ -21,11 +20,11 @@ CREATE TABLE IF NOT EXISTS patients(
     address TEXT,
     symptoms TEXT,
     registration_date TEXT,
-    
+    status TEXT DEFAULT 'Active',
+
     phone TEXT UNIQUE
 )
 ''')
-
 
 # ------ DOCTOR TABLE ------
 cursor.execute('''
@@ -36,11 +35,11 @@ CREATE TABLE IF NOT EXISTS doctors(
     specialization TEXT NOT NULL,
     phone TEXT UNIQUE,
     availability TEXT,
+    employment_status TEXT DEFAULT 'Active',
 
     UNIQUE(doctor_name,specialization)
 )
 ''')
-
 
 # ------ CONSULTATIONS TABLE ------
 cursor.execute('''
@@ -60,7 +59,6 @@ CREATE TABLE IF NOT EXISTS consultations(
 )
 ''')
 
-
 # ------ BILLING TABLE ------
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS billing(
@@ -70,12 +68,11 @@ CREATE TABLE IF NOT EXISTS billing(
     medicine_fee REAL,
     treatment_fee REAL,
     total_bill REAL,
-    
+
     FOREIGN KEY(patient_id)
     REFERENCES patients(patient_id)
 )
 ''')
-
 
 # ------USERS TABLE ------
 cursor.execute('''
@@ -87,15 +84,13 @@ CREATE TABLE IF NOT EXISTS users(
 )
 ''')
 
-
 cursor.execute('''
 INSERT OR IGNORE INTO users
 (username,password,role)
 
 VALUES
-('alhajifodaykoroma','Emperordangotae@1997','Administrator')
+('robertissackamara','Do3tors@veslives','Administrator')
 ''')
-
 
 conn.commit()
 

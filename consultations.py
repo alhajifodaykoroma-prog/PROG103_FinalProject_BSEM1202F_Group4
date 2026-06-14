@@ -4,6 +4,19 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
 
+# ===================== CLINICAL THEME =====================
+NAVY      = "#0B1F3A"
+TEAL      = "#0E7C7B"
+TEAL_DK   = "#0A5C5B"
+CARD_BG   = "#FFFFFF"
+TEXT_DARK = "#0F2440"
+FONT      = "Lato"
+
+
+def _hover(btn, normal, hover):
+    btn.bind("<Enter>", lambda e: btn.config(bg=hover))
+    btn.bind("<Leave>", lambda e: btn.config(bg=normal))
+
 
 # ---------------- Database Connection ----------------
 def get_connection():
@@ -136,6 +149,17 @@ root = Tk()
 root.title("Consultation System")
 root.geometry("900x650")
 root.config(bg="#ECF0F1")
+root.option_add("*Font", (FONT, 10))
+root.option_add("*Entry.relief", "solid")
+root.option_add("*Entry.borderWidth", "1")
+
+# ---------------- TTK CLINICAL STYLING ----------------
+_style = ttk.Style(root)
+try:
+    _style.theme_use("clam")
+except Exception:
+    pass
+_style.configure("TCombobox", font=(FONT, 10), padding=4)
 
 # Tkinter Form Global Tracker Variables
 patient_var = StringVar()
@@ -149,9 +173,10 @@ revisit_var = StringVar()
 Label(
     root,
     text="Consultation Management",
-    font=("Arial", 20, "bold"),
-    bg="#2C3E50",
+    font=(FONT, 20, "bold"),
+    bg=NAVY,
     fg="white",
+    pady=16,
 ).pack(fill=X)
 
 # Centralized Grid Form Layout Frame
@@ -202,13 +227,21 @@ Label(frame, text="Prescription", bg="#ECF0F1").grid(
 Entry(frame, textvariable=prescription_var, width=42).grid(row=4, column=1)
 
 # Interactive Action Buttons
-Button(
+save_consultation_btn = Button(
     root,
     text="Save Consultation",
-    bg="green",
+    bg=TEAL,
     fg="white",
-    font=("Arial", 12),
+    bd=0,
+    cursor="hand2",
+    activebackground=TEAL_DK,
+    activeforeground="white",
+    font=(FONT, 12, "bold"),
+    padx=15,
+    pady=8,
     command=save_consultation,
-).pack(pady=20)
+)
+save_consultation_btn.pack(pady=20)
+_hover(save_consultation_btn, TEAL, TEAL_DK)
 
 root.mainloop()

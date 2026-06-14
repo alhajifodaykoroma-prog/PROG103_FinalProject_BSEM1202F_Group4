@@ -3,6 +3,18 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
 
+# ===================== CLINICAL THEME =====================
+NAVY      = "#0B1F3A"
+TEAL      = "#0E7C7B"
+TEAL_DK   = "#0A5C5B"
+CARD_BG   = "#FFFFFF"
+FONT      = "Lato"
+
+
+def _hover(btn, normal, hover):
+    btn.bind("<Enter>", lambda e: btn.config(bg=hover))
+    btn.bind("<Leave>", lambda e: btn.config(bg=normal))
+
 
 # ---------------- Database Connections ----------------
 def get_connection():
@@ -82,6 +94,17 @@ root = Tk()
 root.title("Billing System")
 root.geometry("800x600")
 root.config(bg="#F8F9F9")
+root.option_add("*Font", (FONT, 10))
+root.option_add("*Entry.relief", "solid")
+root.option_add("*Entry.borderWidth", "1")
+
+# ---------------- TTK CLINICAL STYLING ----------------
+_style = ttk.Style(root)
+try:
+    _style.theme_use("clam")
+except Exception:
+    pass
+_style.configure("TCombobox", font=(FONT, 10), padding=4)
 
 # Form variables
 patient_var = StringVar()
@@ -91,8 +114,8 @@ treatment_var = DoubleVar(value=0.0)
 
 # Heading
 Label(
-    root, text="BILLING SYSTEM", font=("Arial", 18, "bold"), bg="#F8F9F9"
-).pack(pady=20)
+    root, text="BILLING SYSTEM", font=(FONT, 18, "bold"), bg=NAVY, fg="white", pady=16
+).pack(fill=X)
 
 frame = Frame(root, bg="white", padx=20, pady=20)
 frame.pack(pady=20)
@@ -125,19 +148,26 @@ Label(frame, text="Treatment Fee (Le)", bg="white").grid(
 Entry(frame, textvariable=treatment_var, width=35).grid(row=3, column=1)
 
 # Execution Button
-Button(
+calculate_bill_btn = Button(
     root,
     text="Calculate & Save Bill",
-    bg="#0B1F3A",
+    bg=TEAL,
     fg="white",
+    bd=0,
+    cursor="hand2",
+    activebackground=TEAL_DK,
+    activeforeground="white",
+    font=(FONT, 11, "bold"),
     width=25,
     height=2,
     command=calculate_bill,
-).pack(pady=20)
+)
+calculate_bill_btn.pack(pady=20)
+_hover(calculate_bill_btn, TEAL, TEAL_DK)
 
 # Output Total display
 result_label = Label(
-    root, text="", font=("Arial", 14, "bold"), bg="#F8F9F9", fg="green"
+    root, text="", font=(FONT, 14, "bold"), bg="#F8F9F9", fg=TEAL_DK
 )
 result_label.pack(pady=10)
 
